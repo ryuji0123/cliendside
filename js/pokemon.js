@@ -2948,7 +2948,7 @@ function getPokemonData(id, mode)
 	api_request.onload = function () {
 		let data = JSON.parse(this.response);
 		let chosen_pokemon_image = document.createElement('img');
-		chosen_pokemon_image.src = img_url_prefix + ('00' + String(chosen_id)).slice(-3) + pokemons_json[chosen_id - 1]['name']['english'] + '.png';
+		chosen_pokemon_image.src = img_url_prefix + ('00' + String(chosen_id)).slice(-3) + pokemons_json[chosen_id - 1]['name']['english'].replace(/[♀♂]/,'')  + '.png';
 		chosen_pokemon_image.width = '300';
 		document.getElementById('pokemon_img').appendChild(chosen_pokemon_image);
 		appendDetailData(data);
@@ -2961,6 +2961,18 @@ function appendDetailData(data)
 	console.log(data);
 	document.getElementById('name').innerHTML = data.names[1].name;
 	document.getElementById('genera').innerHTML = data.genera[1].genus;
+	document.getElementById('no').innerHTML = 'No : ' + data.id;
+	setFlavorText(data.flavor_text_entries);
+}
+
+function setFlavorText(text_arr)
+{
+	text_arr.forEach((text) => {
+		if ( text.language.name == 'ja' ) {
+			document.getElementById('flavor_text').innerHTML = text.flavor_text;
+			return;
+		}
+	});
 }
 
 function fillPicturebook()
@@ -2970,7 +2982,7 @@ function fillPicturebook()
 		let pokemon_image = document.createElement('img');
 		let anchor = document.createElement('a');
 		anchor.href = 'detail.html?id=' + pokemon_data.id + '&name=' + pokemon_data.name.japanese;
-		pokemon_image.src = msimg_prefix + ( '00' + String(pokemon_data['id']) ).slice(-3) + 'MS.png';
+		pokemon_image.src = msimg_prefix + ( '00' + String(pokemon_data['id'])).slice(-3) + 'MS.png';
 		pokemon_image.width = '100';
 		pokemon_image.setAttribute('data-name', pokemon_data.name.japanese);
 		anchor.classList.add('swing');
