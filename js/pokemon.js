@@ -2937,21 +2937,30 @@ var pokemons_json = [
   },
 ];
 
-function getPokemonData(mode) 
+function getPokemonData(id, mode) 
 {
-	let api_url_prefix = 'https://pokeapi.co/api/v2/pokemon/';
+	let api_url_prefix = 'https://pokeapi.co/api/v2/pokemon-species/';
 	let img_url_prefix = './pokemon/images/';
 	const limit = mode == 'mu' ? 151 : 150 ;
-	let chosen_id = Math.floor(Math.random() * limit);
+	let chosen_id = id != null ? id : Math.floor(Math.random() * limit);
 	let api_request = new XMLHttpRequest();
 	api_request.open('GET', api_url_prefix + String(chosen_id), true);
 	api_request.onload = function () {
 		let data = JSON.parse(this.response);
 		let chosen_pokemon_image = document.createElement('img');
 		chosen_pokemon_image.src = img_url_prefix + ('00' + String(chosen_id)).slice(-3) + pokemons_json[chosen_id - 1]['name']['english'] + '.png';
-		document.getElementById('container').appendChild(chosen_pokemon_image);
+		chosen_pokemon_image.width = '300';
+		document.getElementById('pokemon_img').appendChild(chosen_pokemon_image);
+		appendDetailData(data);
 	};
 	api_request.send();
+}
+
+function appendDetailData(data)
+{
+	console.log(data);
+	document.getElementById('name').innerHTML = data.names[1].name;
+	document.getElementById('genera').innerHTML = data.genera[1].genus;
 }
 
 function fillPicturebook()
@@ -2959,8 +2968,13 @@ function fillPicturebook()
 	let msimg_prefix = './pokemon/sprites/';
 	pokemons_json.forEach(function(pokemon_data) {
 		let pokemon_image = document.createElement('img');
+		let anchor = document.createElement('a');
+		anchor.href = 'detail.html?id=' + pokemon_data.id + '&name=' + pokemon_data.name.japanese;
 		pokemon_image.src = msimg_prefix + ( '00' + String(pokemon_data['id']) ).slice(-3) + 'MS.png';
 		pokemon_image.width = '100';
-		document.getElementById('pokemon_list').appendChild(pokemon_image);
+		pokemon_image.setAttribute('data-name', pokemon_data.name.japanese);
+		anchor.classList.add('swing');
+		anchor.appendChild(pokemon_image);
+		document.getElementById('pokemon_list').appendChild(anchor);
 	});
 }

@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<meta charset='utf-8'/>
+		<script src='js/pokemon.js'></script>
+		<script src='js/getParameter.js'></script>
+		<script src='js/setTitle.js'></script>
+		<script>
+			setTitle(getParameter('name'));
+			window.onload = function ()
+			{
+				getPokemonData(getParameter('id'));
+			}
+		</script>
+	</head>
+	<body>
+		<div id='pokemon_img'></div>
+		<div id='name'></div>
+		<div id='genera'></div>
+		<div id='no'></div>
+
+	</body>
+</html>
