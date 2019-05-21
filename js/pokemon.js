@@ -2958,7 +2958,6 @@ function getPokemonData(id, mode)
 
 function appendDetailData(data)
 {
-	console.log(data);
 	document.getElementById('name').innerHTML = data.names[1].name;
 	document.getElementById('genera').innerHTML = data.genera[1].genus;
 	document.getElementById('no').innerHTML = 'No : ' + data.id;
@@ -2967,10 +2966,18 @@ function appendDetailData(data)
 
 function setFlavorText(text_arr)
 {
-	text_arr.forEach((text) => {
-		if ( text.language.name == 'ja' ) {
-			document.getElementById('flavor_text').innerHTML = text.flavor_text;
-			return;
+	let ssu = new SpeechSynthesisUtterance();
+	let cache = true;
+	ssu.lang = 'ja-JP';
+	text_arr.forEach( (text) => {
+		if ( text.language.name == 'ja' && cache) {
+			cache = false;
+			let flavor = document.getElementById('flavor_text');
+			flavor.innerHTML = text.flavor_text;
+			flavor.addEventListener('click', () => {
+				ssu.text = text.flavor_text;
+				speechSynthesis.speak(ssu);
+			});
 		}
 	});
 }
