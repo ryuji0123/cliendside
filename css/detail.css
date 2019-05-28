@@ -4,9 +4,9 @@
     width: 80%;
     background-color: rgba(238, 237, 237, 0.568);
     display: flex;
-    padding: 60px 30px;
+    padding: 90px 60px;
     justify-content: space-between;
-    border-radius: 20px;
+    border-radius: 30px;
     font-family: 'Kosugi Maru', sans-serif;
 }
 
@@ -81,10 +81,11 @@
     .detailLeft .detailLeft {
         display: inline-block;
         margin: 0 auto;
+        padding-left: 0;
+        padding-right: 0;
     }
     .detailLeft {
         padding-bottom: 50px;
-        padding-right: 0;
     }
     body {
         text-align: center;
