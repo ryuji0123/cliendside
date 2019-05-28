@@ -2956,6 +2956,26 @@ function getPokemonData(id, mode)
 	api_request.send();
 }
 
+let type_ref = {
+	normal: 'default',
+	flying: 'default',
+	dragon: 'default',
+	fairy: 'default',
+	fire: 'red',
+	fighting: 'red',
+	electric: 'yellow',
+	rock: 'brown',
+	ground: 'brown',
+	bug: 'green',
+	grass: 'green',
+	ice: 'blue',
+	water: 'blue',
+	poison: 'purple',
+	ghost: 'purple',
+	psychic: 'purple',
+	steel: 'grey',
+};
+
 function getPokemonType(id)
 {
 	let api_url = 'https://pokeapi.co/api/v2/pokemon/' + String(id)
@@ -2963,7 +2983,14 @@ function getPokemonType(id)
 	api_request.open('GET', api_url, true);
 	api_request.onload = function () {
 		let types = JSON.parse(this.response).types;
-		console.log(types[0].type.name);
+		document.body.className = '';
+		if ( types[1] ) {
+			console.log(types[1].type.name);
+			document.body.classList.add(type_ref[types[1].type.name]);
+		} else {
+			document.body.classList.add(type_ref[types[0].type.name]);
+			console.log(types[0].type.name);
+		}
 	};
 	api_request.send();
 }
