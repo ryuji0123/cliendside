@@ -85,6 +85,7 @@
     }
     .detailLeft {
         padding-bottom: 50px;
+        padding-right: 0;
     }
     body {
         text-align: center;
