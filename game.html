@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Hungry Snake</title>
+	<meta charset="utf-8"/>
+	<script type="text/javascript">
+	"use strict";
+	var W,H,S=20;
+	var snake=[],foods=[];
+	var keyCode=0;
+	var point=0;
+	var timer=NaN;
+	var ctx;
+	
+	//Pointオブジェクト
+	function Point(x,y){
+		this.x=x;
+		this.y=y;
+	}
+	    
+	    
+	    //初期化関数
+	function init(){
+		var canvas=document.getElementById('field');
+		W = canvas.width/S;
+		H = canvas.height/S;
+		ctx = canvas.getContext('2d');
+		ctx.font = "30px sans-serif";
+		
+		
+		//蛇の初期化
+		snake.push(new Point(W/2,H/2));
+		
+		
+		//餌の初期化
+		for(var i=0;i<20;i++){
+			addFood();
+		}
+		
+		timer=setInterval("tick()",200);
+		window.onkeydown=keydown;
+	}
+	//餌の追加
+	function addFood(){
+		while(true){
+			var x=Math.floor(Math.random()*W);
+			var y=Math.floor(Math.random()*H);
+			
+			if(isHit(foods,x,y)||isHit(snake,x,y)) continue;
+			
+			foods.push(new Point(x,y));
+			break;
+		}
+  }
+	//衝突判定
+	function isHit(data,x,y){
+		for(var i=0;i<data.length;i++){
+			if(data[i].x==x&&data[i].y==y) return true;
+		}
+		return false;
+	}
+  
+	function moveFood(x,y){
+		foods=foods.filter(function(p){
+			return(p.x!=x||p.y!=y);
+		});
+		addFood();
+	}
+	
+	function tick(){
+		var x=snake[0].x;
+		var y=snake[0].y;
+		
+		switch(keyCode){
+		case 37:x--;      //左
+			break;
+		case 38:y--;      //上
+			break; 
+		case 39:x++;      //右
+			break;  
+		case 40:y++;      //下
+			break;   
+		default:paint();
+			return;
+		}
+
+		//自分or壁に衝突？
+		if(isHit(snake,x,y)||x<0||x>=W||y<0||y>=H){
+			clearInterval(timer);
+			paint();
+			return;
+		}
+
+		//頭を先頭に追加
+		snake.unshift(new Point(x,y));
+		
+		if(isHit(foods,x,y)){
+			point+=10;   //餌を食べた
+			moveFood(x,y);
+		} else {
+			snake.pop();      //食べていない→尻尾を削除
+		}	
+		
+		paint();
+	}
+ 
+	function paint(){
+		ctx.clearRect(0,0,W*S,H*S);
+		ctx.fillStyle="rgb(256,0,0)";
+		ctx.fillText(point,S,S*2);
+		ctx.fillStyle="rgb(255,0,255)";
+		
+		
+		foods.forEach(function(p){
+			ctx.fillText("+",p.x*S,(p.y+1)*S);
+		});
+		snake.forEach(function(p){
+			ctx.fillText("*",p.x*S,(p.y+1)*S);
+		});
+	}
+
+	function keydown(event){
+		keyCode =event.keyCode;
+	}
+
+	var userName;
+		
+	function resizeRock(){
+		document.getElementById("rockImg").style.height=(document.body.clientHeight-100)*0.9;
+	}
+	
+	function greetUser() {
+		alert('Hello, I am hungry.');
+	}
+	
+	function touchRock() {
+		if (userName) {
+			alert("I wanna eat a lots, " + userName + ".    I'm very hungry!!!");
+		} else {
+			userName = prompt("What is your name?", "Enter your name here.");
+			if (userName) alert("It is good to meet you, " + userName + ".");
+	}
+	document.getElementById("rockImg").src = "img/snake_happy.jpg";
+	setTimeout("document.getElementById('rockImg').src = 'img/snake.jpg';", 5 * 60 * 1000);
+	}
+  </script>
+	<style>
+		h1{color:#ffff44;font-size:60px;font-family:Meiryo;background-color:black;}
+		h3{font-size:30px;background-color:#447700;}
+		h4{font-size:30px;background-color:#447700;}
+	</style>
+</head>
+ 
+
+<body onload="init();"   onload"greetUser();resizeRock();"   onresize="resizeRock();">
+<h1>Hungry Arbok</h1><a>Please press <span style="color:red">D-pad</span> if you want to start this game.</a>
+
+<canvas   id="field" width="600"   height="600"  style="background:#cccccc" >
+</canvas>
+<a>Arbok seems to want you touch him.</a>
+<span style="margin-top:100px; text-align:center">
+      <img id="rockImg" src="img/snake.jpg" alt="snake_happy.jpg" style="cursor:pointer" onclick="touchRock();" />
+    </span>
+<h3><span style="color:purple">Arbok</span> : *</h3>
+<h4> <span style="color:yellow">Food</span>:  +
+
+</body>
+
+</html>
