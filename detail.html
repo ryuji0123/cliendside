@@ -1,23 +1,31 @@
 <html>
-	<head>
-		<meta charset='utf-8'/>
-		<script src='js/pokemon.js'></script>
-		<script src='js/getParameter.js'></script>
-		<script src='js/setTitle.js'></script>
-		<script>
-			setTitle(getParameter('name'));
-			window.onload = function ()
-			{
-				getPokemonData(getParameter('id'));
-			}
-		</script>
-	</head>
-	<body>
-		<div id='pokemon_img'></div>
-		<div id='name'></div>
-		<div id='genera'></div>
-		<div id='no'></div>
-		<div id='flavor_text'></div>
 
-	</body>
+<head>
+	<meta charset='utf-8' />
+	<script src='js/pokemon.js'></script>
+	<script src='js/getParameter.js'></script>
+	<script src='js/setTitle.js'></script>
+	<script>
+		setTitle(getParameter('name'));
+		window.onload = function () {
+			getPokemonData(getParameter('id'));
+		}
+	</script>
+	<link rel="stylesheet" href="css/detail.css">
+</head>
+
+<body>
+	<div class="detailContainer">
+		<div class="detailLeft">
+			<div id='name'></div>
+			<div id='genera'></div>
+			<div id='no'></div>
+			<div id='flavor_text'></div>
+		</div>
+		<div id='pokemon_img' class="detailRight"></div>
+	</div>
+
+
+</body>
+
 </html>
