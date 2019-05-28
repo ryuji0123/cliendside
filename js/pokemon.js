@@ -2956,6 +2956,18 @@ function getPokemonData(id, mode)
 	api_request.send();
 }
 
+function getPokemonType(id)
+{
+	let api_url = 'https://pokeapi.co/api/v2/pokemon/' + String(id)
+	let api_request = new XMLHttpRequest();
+	api_request.open('GET', api_url, true);
+	api_request.onload = function () {
+		let types = JSON.parse(this.response).types;
+		console.log(types[0].type.name);
+	};
+	api_request.send();
+}
+
 function appendDetailData(data)
 {
 	document.getElementById('name').innerHTML = data.names[1].name;
