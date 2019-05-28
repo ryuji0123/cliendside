@@ -8,24 +8,61 @@
     justify-content: space-between;
     border-radius: 20px;
 }
+
 .detailLeft {
     flex: 2;
     line-height: 2rem;
     padding-right: 10%;
 }
+
 .detailRight {
     flex: 1;
 }
+
 #name {
     font-weight: bold;
     font-size: 2rem;
     margin-bottom: 30px;
 }
-body {
+
+.blue {
+    background: -moz-linear-gradient(left, rgba(0, 217, 255, 1) 0%, rgba(17, 0, 255, 1) 100%);
+    background: -webkit-linear-gradient(left, rgba(0, 217, 255, 1) 0%, rgba(17, 0, 255, 1) 100%);
+    background: linear-gradient(to right, rgba(0, 217, 255, 1) 0%, rgba(17, 0, 255, 1) 100%);
+}
+
+.red {
+    background: -moz-linear-gradient(left, rgba(255, 153, 0, 1) 0%, rgba(255, 0, 0, 1) 100%);
+    background: -webkit-linear-gradient(left, rgba(255, 153, 0, 1) 0%, rgba(255, 0, 0, 1) 100%);
+    background: linear-gradient(to right, rgba(255, 153, 0, 1) 0%, rgba(255, 0, 0, 1) 100%);
+}
+
+.yellow {
+    background: -moz-linear-gradient(left, rgba(250, 255, 92, 1) 0%, rgba(250, 255, 92, 1) 20%, rgba(233, 252, 88, 1) 100%);
+    background: -webkit-linear-gradient(left, rgba(250, 255, 92, 1) 0%, rgba(250, 255, 92, 1) 20%, rgba(233, 252, 88, 1) 100%);
+    background: linear-gradient(to right, rgba(250, 255, 92, 1) 0%, rgba(250, 255, 92, 1) 20%, rgba(233, 252, 88, 1) 100%);
+}
+
+.green {
+    background: -moz-linear-gradient(left, rgba(38, 176, 7, 1) 0%, rgba(107, 250, 128, 1) 100%);
+    background: -webkit-linear-gradient(left, rgba(38, 176, 7, 1) 0%, rgba(107, 250, 128, 1) 100%);
+    background: linear-gradient(to right, rgba(38, 176, 7, 1) 0%, rgba(107, 250, 128, 1) 100%);
+}
+
+.brown {
+    background: -moz-linear-gradient(left, rgba(158, 158, 158, 1) 0%, rgba(82, 49, 0, 1) 100%);
+    background: -webkit-linear-gradient(left, rgba(158, 158, 158, 1) 0%, rgba(82, 49, 0, 1) 100%);
+    background: linear-gradient(to right, rgba(158, 158, 158, 1) 0%, rgba(82, 49, 0, 1) 100%);
+}
+
+.default {
     background: -moz-linear-gradient(top, rgba(240, 249, 255, 1) 0%, rgba(203, 235, 255, 1) 47%, rgba(161, 219, 255, 1) 100%);
     background: -webkit-linear-gradient(top, rgba(240, 249, 255, 1) 0%, rgba(203, 235, 255, 1) 47%, rgba(161, 219, 255, 1) 100%);
     background: linear-gradient(to bottom, rgba(240, 249, 255, 1) 0%, rgba(203, 235, 255, 1) 47%, rgba(161, 219, 255, 1) 100%);
 }
+
+body {}
+
 @media (max-width: 720px) {
     .detailContainer {
         display: inline-block;
