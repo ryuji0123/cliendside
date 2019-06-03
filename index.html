@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<meta charset='utf-8'/>
+		<title>
+			TOP
+		</title>
+		<link rel='stylesheet' href='css/index.css'>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js'></script>
+		<script src='js/background_video.js'></script>
+	</head>
+	<body>
+		<div id='container'>
+			<nav>
+				<ul id='menu'>
+					<li><a href='picture_book.html'>図鑑</a></li>
+					<li><a href='game.html'>アーボックゲーム</a></li>
+					<li><a href='typing.html'>タイピングゲーム</a></li>
+				</ul>
+			</nav>
+			<div id="player"></div>
+		</div>
+    <script>
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '70%',
+					width: '100%',
+          videoId: '4mj0ty1QVJc',
+					loop: 1,
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
+	</body>
+</html>
