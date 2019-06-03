@@ -29,6 +29,7 @@ function change_problem(name, id)
 	img.src = './pokemon/images/' + ('00'+String(id+1)).slice(-3) + name + '.png';
 	let text = $('#text');
 	text.html('');
+	name = name.replace(/[_]/ ,'');
 	for ( let i = 0; i < name.length; i++ ) {
 		let elem = document.createElement('span');
 		elem.id = 'char_' + String(i);
