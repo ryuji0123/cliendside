@@ -9,6 +9,8 @@ var prob_cnt;
 var is_completed;
 var rest;
 var fin;
+var elapused_time;
+var timerID;
 
 function game(pokemon_json)
 {
@@ -24,6 +26,10 @@ function game(pokemon_json)
 	}
 	let id = Math.floor(Math.random() * 150);
 	change_problem(arr[id].replace(/[\'♀♂]/,''), id);
+	elapused_time = 0;
+  let timer = document.getElementById("elapsed_time");
+  clearInterval(timerID);
+  timerID = setInterval(function(){timer.textContent = "Elapsed Time: " + elapused_time +" [sec]"; elapused_time++ }, 1000);
 }
 
 function change_problem(name, id)

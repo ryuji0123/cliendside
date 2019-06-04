@@ -8,12 +8,7 @@ img {
 	float:left;
 }
 
-
-div#rest {
-	margin: 10% 5%;
-}
-
-div#text {
+div {
 	font-size: 20px;
 	margin-left: 50%;
 }
