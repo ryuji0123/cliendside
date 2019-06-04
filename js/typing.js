@@ -7,13 +7,16 @@ var cnt;
 var prob_lim;
 var prob_cnt;
 var is_completed;
+var rest;
+var fin;
 
 function game(pokemon_json)
 {
-	for( let i = 0; i < 151; i++ ) {
+	for( let i = 0; i < 150; i++ ) {
 		arr[i] = pokemon_json[i].name.english;
 	}
 	arr[121] = 'Mr_Mime';
+	fin = pokemon_json[150].name.english;
 	is_completed = false;
 	prob_cnt = 0;
 	while ( ( !prob_lim ) || !( prob_lim > 0 && prob_lim < 152)  ) {
@@ -25,6 +28,8 @@ function game(pokemon_json)
 
 function change_problem(name, id)
 {
+	rest = prob_lim - prob_cnt;
+	document.getElementById('rest').innerHTML = '残り : '+ String(rest) + '問';
 	let img = document.getElementById('pokemon_img');
 	img.src = './pokemon/images/' + ('00'+String(id+1)).slice(-3) + name + '.png';
 	let text = $('#text');
@@ -59,8 +64,9 @@ function typeGame(evt)
 						location.href = './index.html';
 					}, 1000);
 				} else {
-					let id = Math.floor(Math.random() * 150);
-					change_problem(arr[id].replace(/[\'♀♂]/,''), id);
+					let id = prob_cnt == 150 ? 150 : Math.floor(Math.random() * 150);
+					let name = prob_cnt == 150 ? fin : arr[id];
+					change_problem(name.replace(/[\'♀♂]/,''), id);
 				}
 			}
 		}
