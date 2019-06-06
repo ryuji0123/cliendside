@@ -2354,7 +2354,7 @@ var pokemons_json = [
   {
     "id": 122,
     "name": {
-      "english": "Mr. Mime",
+      "english": "Mr_Mime",
       "japanese": "バリヤード",
       "chinese": "魔墙人偶"
     },
@@ -2948,7 +2948,7 @@ function getPokemonData(id, mode)
 	api_request.onload = function () {
 		let data = JSON.parse(this.response);
 		let chosen_pokemon_image = document.createElement('img');
-		chosen_pokemon_image.src = img_url_prefix + ('00' + String(chosen_id)).slice(-3) + pokemons_json[chosen_id - 1]['name']['english'].replace(/[\'_♀♂]/,'')  + '.png';
+		chosen_pokemon_image.src = img_url_prefix + ('00' + String(chosen_id)).slice(-3) + pokemons_json[chosen_id - 1]['name']['english'].replace(/[\'♀♂]+/,'')  + '.png';
 		chosen_pokemon_image.width = '300';
 		document.getElementById('pokemon_img').appendChild(chosen_pokemon_image);
 		appendDetailData(data);
@@ -2985,7 +2985,6 @@ function getPokemonType(id)
 		let types = JSON.parse(this.response).types;
 		document.body.className = '';
 		if ( types[1] ) {
-			console.log(types[1].type.name);
 			document.body.classList.add(type_ref[types[1].type.name]);
 		} else {
 			document.body.classList.add(type_ref[types[0].type.name]);
